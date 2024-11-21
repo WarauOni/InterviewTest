@@ -1,0 +1,40 @@
+{% extends 'Kitty/base.html' %}
+
+{% block content %}
+<div class="main-content">
+    <p>Welcome to AddKitty - Malaysia's Premier Kitty Adoption Platform 
+
+        At AddKitty, we believe every cat deserves a loving home. Our platform is dedicated to connecting compassionate individuals with cats in need, creating a seamless and trustworthy adoption process.  
+        
+        As advocates for animal welfare, we partner with local shelters, rescues, and independent caregivers across Malaysia to provide a wide variety of cats for adoption—ranging from playful kittens to senior companions. Whether you're looking for your first pet or adding to your family, we make finding your purr-fect match simple and stress-free.  
+        
+        Through education and support, we also guide new pet parents on responsible cat care, ensuring every adopted feline thrives in their new environment.  
+        
+        Start your adoption journey today and experience the joy of giving a furry friend a second chance at life. Together, we can make a difference—one paw at a time.  
+    </p>
+</div>
+
+<!-- Display the kitties in rows of 3 -->
+<div class="row">
+    {% for kitty in kitties %}
+        {% if forloop.counter0|divisibleby:3 %}
+            </div><div class="row"> <!-- Close the previous row and start a new one -->
+        {% endif %}
+        
+        <div class="column">
+            <div class="kitty-card">
+                <h3>{{ kitty.name }}</h3>
+                <img src="{{ kitty.picture.url }}" alt="{{ kitty.name }}" style="width: 100%; height: auto;">
+                <p>{{ kitty.species }} | Age: {{ kitty.age }}</p>
+                <p>{{ kitty.detail }}</p>
+                <p><strong>History:</strong> {{ kitty.history }}</p>
+                <form method="POST" action="{% url 'adopt_kitty' kitty.id %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-success">Adopt Me!</button>
+                </form>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

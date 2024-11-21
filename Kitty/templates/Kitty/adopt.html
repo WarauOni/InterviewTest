@@ -1,0 +1,20 @@
+{% extends 'Kitty/base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Adopt {{ kitty.name }}</h2>
+    <div class="kitty-card">
+        <img src="{{ kitty.picture.url }}" alt="{{ kitty.name }}" style="width: 100%; height: auto;">
+        <h3>{{ kitty.name }}</h3>
+        <p><strong>Species:</strong> {{ kitty.species }}</p>
+        <p><strong>Age:</strong> {{ kitty.age }}</p>
+        <p><strong>Details:</strong> {{ kitty.detail }}</p>
+        <p><strong>History:</strong> {{ kitty.history }}</p>
+
+        <form method="POST">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-success">Adopt {{ kitty.name }}</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

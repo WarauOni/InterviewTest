@@ -1,0 +1,51 @@
+{% extends 'Kitty/base.html' %}
+
+{% block content %}
+
+<div class="container mt-5">
+    <h2>Add a New Kitty</h2>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        
+        <div class="form-group">
+            <label for="name">Kitty Name</label>
+            <input type="text" class="form-control" id="name" name="name" required>
+        </div>
+
+        <div class="form-group">
+            <label for="species">Species</label>
+            <input type="text" class="form-control" id="species" name="species" required>
+        </div>
+
+        <div class="form-group">
+            <label for="age">Age</label>
+            <input type="number" class="form-control" id="age" name="age" required>
+        </div>
+
+        <div class="form-group">
+            <label for="detail">Detail</label>
+            <textarea class="form-control" id="detail" name="detail" rows="4" required></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="history">History</label>
+            <textarea class="form-control" id="history" name="history" rows="4"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="date_of_birth">Date of Birth</label>
+            <input type="date" class="form-control" id="date_of_birth" name="date_of_birth" required>
+        </div>
+
+        <div class="form-group">
+            <label for="picture">Kitty Picture</label>
+            <input type="file" class="form-control" id="picture" name="picture">
+        </div>
+
+        <button type="submit" class="btn btn-primary mt-3">Add Kitty</button>
+    </form>
+</div>
+
+
+{% endblock %}
+ 

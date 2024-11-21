@@ -1,0 +1,74 @@
+{% extends 'Kitty/base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Update Your Profile</h2>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <!-- First Name -->
+        <div class="form-group">
+            <label for="first_name">First Name</label>
+            <input type="text" class="form-control" name="first_name" value="{{ user.first_name }}" required>
+        </div>
+
+        <!-- Last Name -->
+        <div class="form-group">
+            <label for="last_name">Last Name</label>
+            <input type="text" class="form-control" name="last_name" value="{{ user.last_name }}" required>
+        </div>
+
+        <!-- Email -->
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" name="email" value="{{ user.email }}" required>
+        </div>
+
+        <!-- Date of Birth -->
+        <div class="form-group">
+            <label for="date_of_birth">Date of Birth</label>
+            <input type="date" class="form-control" name="date_of_birth" value="{{ user.date_of_birth|date:'Y-m-d' }}" required>
+        </div>
+
+        <!-- IC Number -->
+        <div class="form-group">
+            <label for="ic_no">IC Number</label>
+            <input type="text" class="form-control" name="ic_no" value="{{ user.ic_no }}" required>
+        </div>
+
+        <!-- Profile Picture -->
+        <div class="form-group">
+            <label for="picture">Profile Picture</label>
+            <input type="file" class="form-control" name="picture">
+            {% if user.picture %}
+                <img src="{{ user.picture.url }}" alt="Profile Picture" style="max-width: 200px; margin-top: 10px;">
+            {% endif %}
+        </div>
+
+        <!-- Phone Number -->
+        <div class="form-group">
+            <label for="no_tel">Phone Number</label>
+            <input type="text" class="form-control" name="no_tel" value="{{ user.no_tel }}" required>
+        </div>
+
+        <!-- Gender -->
+        <div class="form-group">
+            <label for="gender">Gender</label>
+            <select class="form-control" name="gender" required>
+                <option value="M" {% if user.gender == 'M' %}selected{% endif %}>Male</option>
+                <option value="F" {% if user.gender == 'F' %}selected{% endif %}>Female</option>
+                <option value="O" {% if user.gender == 'O' %}selected{% endif %}>Other</option>
+            </select>
+        </div>
+
+        <!-- Address -->
+        <div class="form-group">
+            <label for="address">Address</label>
+            <textarea class="form-control" name="address" rows="4" required>{{ user.address }}</textarea>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-primary">Update Profile</button>
+    </form>
+</div>
+{% endblock %}
